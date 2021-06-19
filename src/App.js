@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React from "react";
+import useStyles from "./useStyles";
+import "./App.css";
+import Header from "./Components/Header/Header";
+import MobileHeader from "./Components/Header/MobileHeader";
+import Main from "./Pages/Main";
+import { BrowserRouter as Router } from "react-router-dom";
+import { AuthProvider } from "./Context/AuthContext";
+import { ModalProvider } from "./Context/ModalContext";
+import Modal from "./Components/Modal/Modal";
 function App() {
+  const classes = useStyles();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <AuthProvider>
+        <ModalProvider>
+          <div className={classes.root}>
+            <div className="web-background"></div>
+            <div className={classes.child}>
+              <Header />
+              <MobileHeader />
+              <Main />
+            </div>
+            <Modal />
+          </div>{" "}
+        </ModalProvider>
+      </AuthProvider>
+    </Router>
   );
 }
 
